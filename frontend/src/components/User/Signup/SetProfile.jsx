@@ -31,16 +31,29 @@ const SetProfile = () => {
                         <a className=" back-link">{'<<< '}back</a>
                         <a className=" skip-link">skip {'>>>'}</a>
 
-                        <div className="profile-image-div relative flex p-0" ref={profileImageRef}>
-                            <input type="file" className="opacity-0 rounded-full" onChange={(e)=>{changeImage(e)}}/>
-                            <div className="edit-img" ref={editImgIcon}>
+                        <div 
+                            className="profile-image-div relative flex p-0" 
+                            ref={profileImageRef}
+                        >
+                            <input 
+                                type="file" 
+                                className="opacity-0 rounded-full" 
+                                onChange={(e)=>{changeImage(e)}}
+                            />
+                            <div 
+                                className="edit-img" 
+                                ref={editImgIcon}
+                            >
                                 <MdEdit />
                             </div>
                         </div>
 
                         <div className="flex flex-col gap-2 w-1/2">
                             <label htmlFor="dob" className="font-semibold">Date of Birth</label>
-                            <input type="date" name="" id="" className="dob h-14"/>
+                            <input 
+                                type="date" 
+                                className="dob h-14"
+                            />
                         </div>
                         
                         <button>SUBMIT</button>

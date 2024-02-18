@@ -22,7 +22,12 @@ const UserTable = () => {
             <thead>
                 <tr className="h-14">
                     <td className="text-center">
-                        <input type="checkbox" checked={selectAllChecked} onChange={changeAllCheckbox}/>
+                        <input 
+                            type="checkbox" 
+                            checked={selectAllChecked} 
+                            onChange={changeAllCheckbox}
+                        />
+
                     </td>
                     <td className="pl-5">Name</td>
                     <td>Date added</td>
@@ -34,7 +39,11 @@ const UserTable = () => {
                 {data.map((item, index) => (
                     <tr key={index}>
                         <td className="text-center px-3">
-                            <input type="checkbox" checked={selectAllChecked}/>
+                            <input 
+                                type="checkbox" 
+                                checked={selectAllChecked}
+                            />
+                            
                         </td>
                         <td className="w-80 flex gap-4 items-center py-4">
                             <div className="h-14 w-14 rounded-full bg-amber-500">

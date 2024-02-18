@@ -51,7 +51,7 @@
 }
 .signup-form  button{
     background-color: rgb(122, 16, 215);
-    color: white;
+    color: #ffffff;
     padding: 10px 20px;
     border-radius: 3px;
     width: fit-content;
@@ -71,7 +71,7 @@
     background-position: center 80px;
     background-repeat: no-repeat;
     background-size: cover;
-    background-color: white;
+    background-color: #ffffff;
 }
 .setProfile-image h1{
     @apply font-semibold ;

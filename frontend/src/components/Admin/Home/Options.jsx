@@ -10,6 +10,7 @@ const Options = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [ show, setShow ] = useState(false);
     const optionsRef = useRef();
+    const fileInpDivRef = useRef();
 
 
     const showOptions = () => {
@@ -21,16 +22,39 @@ const Options = () => {
             setShow(false);
         }
     }
+
+    const changeProfile = (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = () => {
+                fileInpDivRef.current.style.backgroundImage = `url('${reader.result}')`;
+            };
+            reader.readAsDataURL(file);
+        }
+    };
     return(
         <>
-            <button onMouseOver={showOptions} className="option-btn">
+            <button 
+                onMouseOver={showOptions} 
+                className="option-btn"
+            >
                 <SlOptionsVertical />
             </button>
-            <div className="options" ref={optionsRef} onMouseLeave={showOptions}>
+
+            <div 
+                className="options" 
+                ref={optionsRef} 
+                onMouseLeave={showOptions}
+            >
                 <ul>
                     <li className="flex items-center gap-2 pb-3 px-3 py-2">
                         <MdEdit />
-                        <a onClick={() => {setIsModalOpen(true)}}>Edit</a>
+                        <a 
+                            onClick={() => {setIsModalOpen(true)}}
+                        >
+                            Edit
+                        </a>
                     </li>
                     <li className="flex items-center gap-3 pb-3 px-3">
                         <MdDelete />
@@ -38,16 +62,28 @@ const Options = () => {
                     </li>
                 </ul>
             </div>
-            <CustomModal isOpen={isModalOpen} onRequestClose={() => {setIsModalOpen(false)}}>
-                <IoCloseCircleOutline className="modal-close" onClick={() => {setIsModalOpen(false)}}/>
+            <CustomModal 
+                isOpen={isModalOpen} 
+                onRequestClose={() => {setIsModalOpen(false)}}
+            >
+                <IoCloseCircleOutline 
+                    className="modal-close" 
+                    onClick={() => {setIsModalOpen(false)}}
+                />
 
                 <h1 className="text-4xl text-center font-semibold mt-10">EDIT USER</h1>
 
                 <div className="admin-add-user flex justify-center items-center">
 
                     <div className="change-img flex-1 flex justify-center">
-                        <div className="flex relative h-80 w-80 bg-blue-700 rounded-full">
-                            <input type="file" className="rounded-full opacity-0" />
+                        <div className="flex relative h-80 w-80 bg-blue-700 rounded-full bg-cover" 
+                            ref={fileInpDivRef}
+                        >
+                            <input 
+                                type="file" 
+                                className="rounded-full opacity-0" 
+                                onChange={(e) => {changeProfile(e)}}
+                            />
                             <div className="absolute h-16 w-16 bg-orange-600 rounded-full bottom-1 right-10 flex justify-center items-center">
                                 <MdEdit className="text-2xl"/>
                             </div>

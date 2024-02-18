@@ -23,6 +23,7 @@
 .admin-login-container h1{
     font-size: 45px;
     font-weight: bold;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 .admin-login-container input{
     outline: none;
@@ -30,13 +31,15 @@
     border-radius: 3px;
     padding-left: 10px;
     color: black;
-    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
 }
 .admin-login-container button{
-    background-color: rgb(19, 14, 175);
+    background-color: rgb(69, 24, 88);
     padding: 1rem 2rem;
     border-radius: 5px;
     color: #fff;
     font-weight: bold;
     box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+}
+.admin-login-container button:hover{
+    background-color: rgba(104, 30, 135, 0.89);
 }

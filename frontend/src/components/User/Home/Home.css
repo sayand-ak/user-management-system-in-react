@@ -1,6 +1,6 @@
 
 .home-container{
-    height: 100vh;
+    min-height: 100vh;
 }
 .home-container nav{
     width: 100vw;
@@ -10,7 +10,7 @@
     align-items: center;
     padding: 0 3rem;
     background-color: #f3f3f4;
-    min-height: 10%;
+    min-height: 8vh;
     box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
     color: #000000;
 }
@@ -18,10 +18,11 @@
     @apply sm:w-full sm:rounded-none md:w-full lg:w-full xl:w-1/2 xl:mt-20 xl:rounded-3xl;
     min-height: 70%;
     border-radius: 4rem;
-    background: #f3f4f4;
+    background: #f8f8f8;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 0px 6px, rgba(0, 0, 0, 0.23) 0px 0px 6px;
     flex-wrap: wrap;
     color: #000000;
+    margin-bottom: 5rem;
   }
   
 .image-div{
@@ -29,6 +30,7 @@
     width: 250px;
     border-radius: 50%;
     background-color: rgb(255, 255, 255);
+    background-size: cover;
     box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
   }
 .image-div input{
@@ -36,7 +38,9 @@
 }
 .user-datas input{
     width: 130px;
-    background-color: transparent;
+}
+.user-datas input::placeholder{
+  color: #000000;
 }
 
 /* edit button */
@@ -91,7 +95,7 @@
     position: absolute;
     bottom: 19px;
     left: -5px;
-    background-color: white;
+    background-color: #ffffff;
     border-radius: 2px;
     z-index: 2;
     transform: scaleX(0);
@@ -103,5 +107,16 @@
     left: 0px;
     transform-origin: right;
   }
+
+  /* submit button */
+.submit-btn{
+  background-color: #096321;
+  padding: 0.5rem 1.5rem;
+  border-radius: 10px;
+  color: #f4f4f4;
+  font-weight: bold;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.336);
+  display: none;
+}
 
   
