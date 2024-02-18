@@ -1,0 +1,116 @@
+.signup{
+    min-height: 100vh;
+    @apply flex justify-center items-center
+}
+
+.signup-container{
+    @apply flex flex-col w-full mx-4 sm:w-5/6 sm:flex-row xl:w-3/4;
+    min-height: 80vh;
+    background-color: #f4f4f4;
+    border-radius: 30px;
+    overflow: hidden;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+}
+.signup-image{
+    flex: 1;
+    background-image: url("/src/assets/Wavy_Gen-01_Single-07-Photoroom.png-Photoroom.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-color: #925ee2;
+    background-position: center 10rem;
+    color: rgb(255, 255, 255);
+}
+.signup-form{
+    flex: 1;
+}
+.signup-image h1{
+    font-weight: 700;
+    text-align: center;
+    padding-top: 5rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.321);
+}
+.signup-image span{
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.235);
+    font-size: xx-large;
+    font-weight: 500;
+    text-align: center;
+}
+.signup-form li{
+    display: flex;
+    flex-direction: column;
+}
+
+.signup-form input{
+    outline: none;
+    border: 0.5px solid rgba(128, 128, 128, 0.503); 
+    border-radius: 3px;
+    height: 2.5rem;
+    padding: 8px 10px;
+    letter-spacing: 0.5px;
+    background-color: rgba(255, 255, 255, 0.595);
+}
+.signup-form  button{
+    background-color: rgb(122, 16, 215);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 3px;
+    width: fit-content;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+.signup-form input:focus {
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+.signup-form button:hover{
+    box-shadow: rgba(0, 0, 0, 0.36) 0px 3px 8px;
+}
+
+/* set profile page */
+.setProfile-image{
+    background-image: url("/src/assets/20943587.jpg");
+    background-position: center 80px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: white;
+}
+.setProfile-image h1{
+    @apply font-semibold ;
+    font-size: 40px;
+    color: cornflowerblue;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+.profile-image-div{
+    max-width: 16rem;
+    min-height: 16rem;
+    border-radius: 50%;
+    background-image: url("/src/assets/profile_10302971.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 110%;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
+}
+.edit-img{
+    @apply opacity-0 absolute bottom-4 right-0 h-14 w-14 text-2xl bg-yellow-500 rounded-full flex items-center justify-center;
+}
+.skip-link{
+    @apply absolute top-2 right-7 opacity-25 hover:opacity-100 cursor-pointer;
+}
+.back-link{
+    @apply absolute top-2 left-3 opacity-30 hover:opacity-100;
+}
+.dob{
+    @apply p-4 bg-white outline-0;
+    border: 0.5px solid grey;
+}
+.dob:focus{
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
+}
+
+.setProfile-form  button{
+    background-color: rgb(122, 16, 215);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 3px;
+    width: fit-content;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}

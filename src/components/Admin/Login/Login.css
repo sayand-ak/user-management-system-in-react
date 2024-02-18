@@ -1,0 +1,42 @@
+.admin-login{
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f4f4f4;
+}
+.admin-login-container{
+    @apply w-full m-5 rounded-none lg:w-full;
+    min-height: 500px;
+    background-image: url("/src/assets/Login\ \(2\).png");
+    background-position: center;
+    background-size: cover;
+    color: #fff;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+@media (min-width: 1024px) {
+    .admin-login-container {
+      border-radius: 4rem; 
+      width: 40rem;
+    }
+}
+.admin-login-container h1{
+    font-size: 45px;
+    font-weight: bold;
+}
+.admin-login-container input{
+    outline: none;
+    height: 2.5rem;
+    border-radius: 3px;
+    padding-left: 10px;
+    color: black;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+}
+.admin-login-container button{
+    background-color: rgb(19, 14, 175);
+    padding: 1rem 2rem;
+    border-radius: 5px;
+    color: #fff;
+    font-weight: bold;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+}
