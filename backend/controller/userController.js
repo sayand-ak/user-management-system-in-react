@@ -1,22 +1,72 @@
-import asyncHandler from "express-async-handler"
+import asyncHandler from "express-async-handler";
+import Users from "../model/userModel.js";
+import generateToken from "../auth/generateToken.js";
+import userModel from "../model/userModel.js";
 // @desc Auth user/ Set token
 //route POST /api/user/auth
 // access public
 const authUser = asyncHandler(async(req, res) => {
-    res.status(200).json({ message: "Auth user" })
+    const { email, password } = req.body;
+
+    const user = await Users.findOne({email: email});
+
+    if(user && (await user.matchPassword(password))){
+        generateToken(res, user._id);
+        res.status(201).json({
+            _id: user._id,
+            name: user.name,
+            email: user.email,
+            password: user.password
+        })
+    }else{
+        res.status(401);
+        throw new Error("Invalid user data")
+    }
 })
 
 // @desc register new user/ Set token
 //route POST /api/user
 // access public
 const registerUser = asyncHandler(async(req, res) => {
-    res.status(200).json({ message: "register user" })
+    const { fname, lname, email, phone, password } = req.body;
+    
+    const userExist = await Users.findOne({email: email});    
+    if(userExist){
+        res.status(400);
+        throw new Error("User already exist!");
+    }
+
+    const newUser = Users.create({
+        fname: fname,
+        lname: lname,
+        email: email,
+        phone: phone,
+        password: password
+    });
+    
+
+    if(newUser){
+        generateToken(res, newUser._id);
+        res.status(201).json({
+            _id: newUser._id,
+            name: newUser.name,
+            email: newUser.email,
+            password: newUser.password
+        })
+    }else{
+        res.status(400);
+        throw new Error("Invalid user data")
+    }
 })
 
 // @desc logout user/ Set token
 //route POST /api/user/logout
 // access public
 const logoutUser = asyncHandler(async(req, res) => {
+    res.cookie('jwt', '', {
+        httpOnly: true,
+        expires: new Date(0)
+    })
     res.status(200).json({ message: "logout user" })
 })
 
@@ -24,7 +74,12 @@ const logoutUser = asyncHandler(async(req, res) => {
 //route GET /api/user/profile
 // access private
 const getUserProfile = asyncHandler(async(req, res) => {
-    res.status(200).json({ message: "user profile" })
+    let user = {
+        fname: req.user.fname,
+        lname: req.user.lname,
+        email: req.user.email
+    }
+    res.status(200).json(user);
 })
 
 // @desc update user profile/ Set token
