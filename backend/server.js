@@ -6,6 +6,8 @@ import userRoutes from "./routes/userRoutes.js";
 import { notFound, errorHandler } from "./middlewares/errorMiddleware.js";
 import connectDB from "./config/db.js";
 import cookieParser from "cookie-parser";
+import path from 'path';
+import cors from 'cors';
 
 const app = express();
 
@@ -13,7 +15,13 @@ app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(cookieParser());
 
-connectDB()
+connectDB();
+
+const __filename = new URL(import.meta.url).pathname;
+const __dirname = path.dirname(__filename);
+app.use(cors());
+
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 app.use("/api/user", userRoutes);
 

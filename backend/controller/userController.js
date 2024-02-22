@@ -2,6 +2,8 @@ import asyncHandler from "express-async-handler";
 import Users from "../model/userModel.js";
 import generateToken from "../auth/generateToken.js";
 import userModel from "../model/userModel.js";
+import path from 'path';
+import fs from "fs";
 // @desc Auth user/ Set token
 //route POST /api/user/auth
 // access public
@@ -13,10 +15,7 @@ const authUser = asyncHandler(async(req, res) => {
     if(user && (await user.matchPassword(password))){
         generateToken(res, user._id);
         res.status(201).json({
-            _id: user._id,
-            name: user.name,
-            email: user.email,
-            password: user.password
+            userData:user
         })
     }else{
         res.status(401);
@@ -36,30 +35,49 @@ const registerUser = asyncHandler(async(req, res) => {
         throw new Error("User already exist!");
     }
 
-    const newUser = Users.create({
+    const newUser = await Users.create({
         fname: fname,
         lname: lname,
         email: email,
         phone: phone,
-        password: password
-    });
-    
+        password: password,
+        profile_image: null,
+        dob: null
+    });    
 
     if(newUser){
         generateToken(res, newUser._id);
         res.status(201).json({
-            _id: newUser._id,
-            name: newUser.name,
-            email: newUser.email,
-            password: newUser.password
+            userData: newUser
         })
     }else{
         res.status(400);
         throw new Error("Invalid user data")
     }
+});
+
+// @desc update user
+//route POST /api/user/setProfile
+// access protect
+const addProfileData = asyncHandler(async(req, res) => {
+    const {dob, user_id} = req.body;
+    const image = req.file;
+
+    const updatedProfile = await Users.findByIdAndUpdate(
+        user_id,
+        { $set: { profile_image: image.filename, dob: dob } },
+        { new: true } 
+      );
+
+    if(updatedProfile){
+        res.status(201).json({userData: updatedProfile});
+    }else{ 
+        res.status(500)
+        throw new Error("server error");
+    }
 })
 
-// @desc logout user/ Set token
+// @desc logout user
 //route POST /api/user/logout
 // access public
 const logoutUser = asyncHandler(async(req, res) => {
@@ -86,12 +104,43 @@ const getUserProfile = asyncHandler(async(req, res) => {
 //route PUT /api/user
 // access private
 const updateUserProfile = asyncHandler(async(req, res) => {
-    res.status(200).json({ message: "update user profile" })
+    const {userId, name, dob, phone } = req.body;
+    const fname = name.split(" ")[0];
+    const lname = name.split(" ")[1];
+    const image = req.file
+
+    const user = await Users.findById({_id: userId});
+    
+    if(user) {
+        user.fname = fname || user.fname;
+        user.lname = lname || user.lname;
+        user.dob = dob || user.dob;
+        user.phone = phone || user.phone;
+        if(image){
+            // finding and unlinking  the file
+            const __filename = new URL(import.meta.url).pathname;
+            const __dirname = path.dirname(__filename);
+            const oldImgPath = path.join(__dirname,"..", 'uploads', user.profile_image);
+            fs.unlinkSync(oldImgPath);
+            user.profile_image = image.filename;
+        }
+    };
+    const updatedUser = await user.save();
+    if(updatedUser) {
+        console.log(updatedUser);
+        res.status(201).json({userData: updatedUser});
+    }else{
+        console.log("hi");
+        res.status(500)
+        throw new Error("server error");
+    }
+    
 })
 
 export {
     authUser,
     registerUser,
+    addProfileData,
     logoutUser,
     getUserProfile,
     updateUserProfile

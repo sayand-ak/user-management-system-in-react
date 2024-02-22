@@ -13,27 +13,37 @@
 }
 .signup-image{
     flex: 1;
-    background-image: url("/src/assets/Wavy_Gen-01_Single-07-Photoroom.png-Photoroom.png");
+    background-color: #925FE2;
+    background-image: url("/src/assets/24122238_bwink_ppl_01_single_01\ [Converted]-01\ \(1\).png");
     background-repeat: no-repeat;
-    background-size: contain;
-    background-color: #925ee2;
-    background-position: center 10rem;
+    background-size: cover;
+    background-position: center 70px;
     color: rgb(255, 255, 255);
 }
 .signup-form{
     flex: 1;
 }
 .signup-image h1{
+    font-size: 40px;
     font-weight: 700;
     text-align: center;
-    padding-top: 5rem;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.321);
+    padding-top: 3rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.341);
+    color: #e4ddef;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.signup-image img{
+    opacity: .9;   
+    filter: saturate(70%);
+
 }
 .signup-image span{
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.235);
-    font-size: xx-large;
-    font-weight: 500;
+    font-size: x-large;
+    font-weight: 700;
     text-align: center;
+    color: #e4ddef;
+    font-family: Arial, Helvetica, sans-serif;
 }
 .signup-form li{
     display: flex;
@@ -67,17 +77,16 @@
 
 /* set profile page */
 .setProfile-image{
-    background-image: url("/src/assets/20943587.jpg");
+    background-image: url("/src/assets/Mobile\ login-rafiki.png");
     background-position: center 80px;
     background-repeat: no-repeat;
     background-size: cover;
-    background-color: #ffffff;
+    background-color: #925FE2;
 }
 .setProfile-image h1{
     @apply font-semibold ;
     font-size: 40px;
-    color: cornflowerblue;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    color: rgb(228, 229, 232);
 }
 .profile-image-div{
     max-width: 16rem;
@@ -113,4 +122,5 @@
     border-radius: 3px;
     width: fit-content;
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    margin-bottom: 5rem;
 }
