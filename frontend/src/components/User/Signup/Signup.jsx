@@ -31,11 +31,11 @@ const Signup = () => {
 
     const handleProceed = async() => {
         if(
-            nameValidate(fname, fnameError) && 
-            nameValidate(lname, lnameError) &&
-            isEmailValid(email, emailError) && 
+            nameValidate(fname, setFname, fnameError) && 
+            nameValidate(lname, setLname, lnameError) &&
+            isEmailValid(email, setEmail, emailError) && 
             isPhoneValid(phone, phoneError) && 
-            isPasswordValid(password, passwordError) &&
+            isPasswordValid(password, setPassword, passwordError) &&
             isConfirmPasswordValid(password, confirmPassword, confirmPasswordError)
         ){
             const response = await dispatch(signupUserAsync({ fname, lname, email, phone, password }));

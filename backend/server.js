@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 dotenv.config();
 const port = process.env.PORT || 3000;
 import userRoutes from "./routes/userRoutes.js";
+import adminRoutes from "./routes/adminRoutes.js";
 import { notFound, errorHandler } from "./middlewares/errorMiddleware.js";
 import connectDB from "./config/db.js";
 import cookieParser from "cookie-parser";
@@ -24,6 +25,7 @@ app.use(cors());
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 app.use("/api/user", userRoutes);
+app.use("/api/admin", adminRoutes);
 
 app.get("/", (req, res) => res.send("server ready"));
 

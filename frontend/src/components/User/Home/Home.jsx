@@ -22,7 +22,7 @@ const Home = () => {
                 </div>
                 <Tooltip id="my-tooltip" />
             </nav>
-            <div className="home-banner">
+            <div className="home-banner flex-col-reverse sm:flex-row">
                 <div className="home-banner-description">
                     <h1 className="welcome">
                         Hello, <span className="text-4xl font-semibold">{userData.fname+" "+userData.lname}</span>

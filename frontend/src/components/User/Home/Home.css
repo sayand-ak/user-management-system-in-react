@@ -1,5 +1,4 @@
 .home{
-    min-height: 100vh;
     background-color: #fff;
 }
 
@@ -39,10 +38,12 @@
     background-position: center;
     background-repeat: no-repeat;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    min-height: 30rem;
 }
 .home-banner-description{
     flex: 1;
     padding-top: 10rem;
+    padding-bottom: 10rem;
 }
 .home-banner-description .welcome{
     font-size: 35px;

@@ -1,11 +1,14 @@
 import { configureStore } from "@reduxjs/toolkit";
-import authSlice from "./slices/authSlice";
+import { adminAuthSlice, userAuthSlice } from "./slices/authSlice"; // Adjust the path
 import usersApiSlice from "./slices/usersApiSlice";
+import adminApiSlice from "./slices/adminApiSlice";
 
 const store = configureStore({
   reducer: {
-    auth: authSlice,
-    api: usersApiSlice
+    auth: userAuthSlice.reducer,
+    admin: adminAuthSlice.reducer,
+    api: usersApiSlice,
+    adminApi: adminApiSlice
   },
   devTools: true,
 });

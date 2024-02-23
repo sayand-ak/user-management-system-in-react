@@ -2,14 +2,14 @@ import express from 'express';
 import { authUser, registerUser, addProfileData, logoutUser, getUserProfile, updateUserProfile } from '../controller/userController.js';
 import { protect } from '../middlewares/authMiddleware.js';
 import upload from '../controller/uploadController.js';
-const router = express.Router();
+const userRouter = express.Router();
 
 
-router.post("/", registerUser);
-router.patch("/setProfile", protect, upload, addProfileData);
-router.post("/auth", authUser);
-router.post("/logout", logoutUser);
-router.get("/profile", protect, getUserProfile);
-router.put("/profile", protect, upload, updateUserProfile);
+userRouter.post("/", registerUser);
+userRouter.patch("/setProfile", protect, upload, addProfileData);
+userRouter.post("/auth", authUser);
+userRouter.post("/logout", logoutUser);
+userRouter.get("/profile", protect, getUserProfile);
+userRouter.put("/profile", protect, upload, updateUserProfile);
 
-export default router;
+export default userRouter;

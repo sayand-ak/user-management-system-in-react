@@ -4,6 +4,7 @@ import generateToken from "../auth/generateToken.js";
 import userModel from "../model/userModel.js";
 import path from 'path';
 import fs from "fs";
+
 // @desc Auth user/ Set token
 //route POST /api/user/auth
 // access public
@@ -121,16 +122,16 @@ const updateUserProfile = asyncHandler(async(req, res) => {
             const __filename = new URL(import.meta.url).pathname;
             const __dirname = path.dirname(__filename);
             const oldImgPath = path.join(__dirname,"..", 'uploads', user.profile_image);
-            fs.unlinkSync(oldImgPath);
+            if(oldImgPath){
+                fs.unlinkSync(oldImgPath);
+            }
             user.profile_image = image.filename;
         }
     };
     const updatedUser = await user.save();
     if(updatedUser) {
-        console.log(updatedUser);
         res.status(201).json({userData: updatedUser});
     }else{
-        console.log("hi");
         res.status(500)
         throw new Error("server error");
     }

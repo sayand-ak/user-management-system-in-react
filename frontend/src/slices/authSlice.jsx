@@ -9,13 +9,13 @@ const getStoredUserInfo = () => {
     }
 };
 
-const initialState = {
+const userInitialState = {
     userInfo: getStoredUserInfo(),
 };
 
-const authSlice = createSlice({
+const userAuthSlice = createSlice({
     name: 'auth',
-    initialState,
+    initialState: userInitialState,
     reducers: {
         setCredentials: (state, action) => {
             state.userInfo = action.payload;
@@ -28,6 +28,35 @@ const authSlice = createSlice({
     },
 });
 
-export const{setCredentials, logout} = authSlice.actions;
+const getStoredAdminInfo = () => {
+    try {
+        return localStorage.getItem('adminInfo') ? JSON.parse(localStorage.getItem('adminInfo')) : null;
+    } catch (error) {
+        console.error('Error parsing admin info from local storage:', error);
+        return null;
+    }
+};
 
-export default authSlice.reducer;
+const adminInitialState = {
+    adminInfo: getStoredAdminInfo(),
+};
+
+const adminAuthSlice = createSlice({
+    name: 'adminAuth',
+    initialState: adminInitialState,
+    reducers: {
+        setAdminCredentials: (state, action) => {
+            state.adminInfo = action.payload;
+            localStorage.setItem('adminInfo', JSON.stringify(action.payload))
+        },
+        adminLogout: (state) => {
+            state.adminInfo = null;
+            localStorage.removeItem('adminInfo')
+        },
+    },
+});
+
+export const { setAdminCredentials, adminLogout } = adminAuthSlice.actions;
+export const { setCredentials, logout } = userAuthSlice.actions;
+
+export { adminAuthSlice, userAuthSlice };

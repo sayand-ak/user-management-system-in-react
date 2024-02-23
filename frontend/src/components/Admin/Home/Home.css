@@ -2,6 +2,7 @@
     min-height: 100vh;
 }
 .admin-home nav{
+    max-height: 4.5rem;
     background-color: #fff;
     display: flex;
     justify-content: space-between;
@@ -10,6 +11,40 @@
     color: rgb(0, 0, 0);
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
+.admin-profile{
+    height: 3rem;
+    width: 3rem;
+    border-radius: 50%;
+    background-image: url("/src/assets/profile_10302971.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.admin-profile div{
+    background-color: #f4f4f4;
+    padding: 1rem 1rem;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    right: 1.5rem;
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: transform 0.1s ease; 
+}
+
+.admin-profile > div.open {
+    opacity: 1;
+    visibility: visible;
+    transform: scaleY(1);
+    transition: transform 0.3s ease, opacity 0.3s ease, visibility 0s linear;
+  }
+  
+  .admin-profile > div.closed {
+    opacity: 0;
+    visibility: hidden;
+    transform: scaleY(0);
+    transition: transform 0.3s ease, opacity 0.3s ease, visibility 0s linear 0.3s;
+  }
+  
+
 table{
     border-radius: 20px;
     overflow: hidden;
@@ -49,6 +84,8 @@ tbody tr{
 .admin-add-user {
     height: 30rem;
 }
+
+
 .change-data input{
      height: 3rem;
      outline: none;
