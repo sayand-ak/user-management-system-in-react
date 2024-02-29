@@ -26,7 +26,6 @@ const SetProfile = () => {
         })
     }
 
-
     const changeImage = (e) => {
         const file = e.target.files[0];
         if (file) {
