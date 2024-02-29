@@ -1,5 +1,6 @@
 import { Route, Routes } from 'react-router-dom';
 import { Suspense, lazy } from 'react';
+import NotFound from '../Error/NotFound';
 
 const Login = lazy(() => import("./Login/Login"));
 const Signup = lazy(() => import("./Signup/Signup"));
@@ -21,6 +22,7 @@ const UserRoutes = () => {
                 <Route path='setProfile' element={<SetProfile/>} />
                 <Route path='home' element={<Home/>} />
                 <Route path='profile' element={<Profile/>} />
+                <Route path='*' element={<NotFound />} />
             </Routes>
         </Suspense>
     )

@@ -23,7 +23,7 @@ const Login = () => {
     const handleLogin = async () => {
         try {
 
-            if(isEmailValid(email, emailError) && isPasswordValid(password, setPassword, passwordError)){
+            if(isEmailValid(email, setEmail, emailError) && isPasswordValid(password, setPassword, passwordError)){
                 const response = await dispatch(loginUserAsync({ email, password }));
         
                 if (response.payload) {

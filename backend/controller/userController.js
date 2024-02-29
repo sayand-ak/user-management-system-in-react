@@ -4,6 +4,7 @@ import generateToken from "../auth/generateToken.js";
 import userModel from "../model/userModel.js";
 import path from 'path';
 import fs from "fs";
+import { log } from "console";
 
 // @desc Auth user/ Set token
 //route POST /api/user/auth

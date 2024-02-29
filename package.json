@@ -28,7 +28,8 @@
     "nanoid": "^5.0.6",
     "react-redux": "^9.1.0",
     "react-toastify": "^10.0.4",
-    "react-tooltip": "^5.26.3"
+    "react-tooltip": "^5.26.3",
+    "sweetalert2": "^11.10.5"
   },
   "devDependencies": {
     "concurrently": "^8.2.2",

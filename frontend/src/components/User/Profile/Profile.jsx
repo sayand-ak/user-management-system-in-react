@@ -61,7 +61,6 @@ const Profile = () => {
             formData.append("phone", phone);
             formData.append("profileImage", img);
             const response = await dispatch(updateUerProfileAsync(formData));
-            console.log(response.payload);
             if(response.payload){
                 dispatch(setCredentials(response.payload));
                 showToast("success", "Profile updated successfully..")

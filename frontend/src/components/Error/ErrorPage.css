@@ -1,0 +1,23 @@
+.errorMainDiv{
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: black;
+}
+.errorMainDiv h1{
+    font-size: 250px;
+    font-weight: bolder;
+    opacity: 0.8;
+    background: linear-gradient(to right, #a621f3, #ad08ff,#cf5c23, #ee4444);
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+}
+.errorMainDiv p{
+    position:absolute;
+    top: 65%;
+    font-size: 40px;
+    color: rgb(195, 192, 192);
+}

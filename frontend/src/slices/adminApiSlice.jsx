@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { loginAdminAsync, getUserData, addUser,updateUserData } from './adminAuthAction';
+import { loginAdminAsync, getUserData, addUser,updateUserData, deleteUser, logoutAdmin } from './adminAuthAction';
 
 const initialState = {
   admin: null,
@@ -33,6 +33,14 @@ const adminAuthSlice = createSlice({
           state.status = "loading"
           state.error = null
         })
+        builder.addCase(deleteUser.pending, (state) => {
+          state.status = "loading"
+          state.error = null
+        })
+        builder.addCase(logoutAdmin.pending, (state) => {
+          state.status = "loading"
+          state.error = null
+        })
         builder.addCase(loginAdminAsync.fulfilled, (state, action) => {
             state.status = "success"
             state.admin = action.payload
@@ -51,6 +59,14 @@ const adminAuthSlice = createSlice({
           state.status = "success"
           state.error = null
         })
+        builder.addCase(deleteUser.fulfilled, (state) => {
+          state.status = "success"
+          state.error = null
+        })
+        builder.addCase(logoutAdmin.fulfilled, (state) => {
+          state.status = "success"
+          state.error = null
+        })
         builder.addCase(loginAdminAsync.rejected, (state, action) => {
             state.status = "rejected"
             state.error = action.error.message
@@ -64,6 +80,14 @@ const adminAuthSlice = createSlice({
         state.error = action.error.message
       })
       builder.addCase(updateUserData.rejected, (state, action) => {
+        state.status = "rejected"
+        state.error = action.error.message
+      });
+      builder.addCase(deleteUser.rejected, (state, action) => {
+        state.status = "rejected"
+        state.error = action.error.message
+      })
+      builder.addCase(logoutAdmin.rejected, (state, action) => {
         state.status = "rejected"
         state.error = action.error.message
       })

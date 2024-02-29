@@ -17,12 +17,12 @@ const Login = () => {
     const dispatch = useDispatch();
 
     const checkPassword = (e) => {
-        isPasswordValid(e.target.value, passwordError)
+        isPasswordValid(e.target.value, setPassword, passwordError)
         setPassword(e.target.value);
     }
 
     const submitAdminLogin = async() => {
-        if(isPasswordValid(password, passwordError) && validateName(username, setUsername, usernameError)){
+        if(isPasswordValid(password, setPassword, passwordError) && validateName(username, setUsername, usernameError)){
             const response = await dispatch(loginAdminAsync({username, password}));
             await dispatch(setAdminCredentials(response.payload));
             if(response.payload){

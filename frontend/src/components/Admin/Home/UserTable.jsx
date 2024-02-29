@@ -4,10 +4,12 @@ import Options from "./Options";
 import { getUserData } from "../../../slices/adminAuthAction";
 import { useDispatch } from "react-redux";
 import { format } from 'date-fns';
-import { nanoid } from 'nanoid'
+import { nanoid } from 'nanoid';
+import PropTypes from 'prop-types';
 
 
-const UserTable = () => {
+
+const UserTable = ({ searchedData }) => {
     const [ selectAllChecked, setSelectAllChecked ] = useState(false);
     const [userData, setUserData] = useState([]);
     const dispatch = useDispatch();
@@ -24,12 +26,12 @@ const UserTable = () => {
         }
         fetchUserData()
     },[dispatch]);
-    console.log(userData);
 
       const changeAllCheckbox = () => {
         setSelectAllChecked(!selectAllChecked);
       }
-
+      
+      const dataToRender = searchedData.length > 0 ? searchedData : userData;
 
     return(
         <table className="w-3/4 mb-10">
@@ -50,7 +52,7 @@ const UserTable = () => {
                 </tr>
             </thead>
             <tbody>
-                {userData.map((item) => (
+                {dataToRender.map((item) => (
                     <tr key={item.nano_id}>
                         <td className="text-center px-3">
                             <input 
@@ -82,5 +84,17 @@ const UserTable = () => {
         </table>
         )
 }
+
+UserTable.propTypes = {
+    searchedData: PropTypes.arrayOf(PropTypes.shape({
+        nano_id: PropTypes.string.isRequired,
+        profile_image: PropTypes.string,
+        fname: PropTypes.string.isRequired,
+        lname: PropTypes.string.isRequired,
+        email: PropTypes.string.isRequired,
+        createdAt: PropTypes.string.isRequired,
+        dob: PropTypes.string.isRequired,
+    })),
+};
 
 export default UserTable;

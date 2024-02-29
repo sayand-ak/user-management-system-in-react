@@ -28,5 +28,15 @@ const updateUserData = createAsyncThunk("/admin/updateUser", async(formData) => 
     });
     console.log(response.data);
     return response.data;
+});
+
+const deleteUser = createAsyncThunk("/admin/deleteUser", async(userId) => {
+    const response = await axios.delete(`/api/admin/deleteUser/${userId}`);
+    return response.data;
 })
-export {loginAdminAsync, getUserData, addUser, updateUserData};
+
+const logoutAdmin = createAsyncThunk("/admin/logout", async() => {
+    const response = await axios.post("/api/admin/logout");
+    return response.data;
+})
+export {loginAdminAsync, getUserData, addUser, updateUserData, deleteUser, logoutAdmin};

@@ -8,9 +8,10 @@ import { useRef, useState } from "react";
 import PropTypes from 'prop-types';
 import { ToastContainer } from "react-toastify";
 import showToast from "../../Toast/Toast";
-import { updateUserData } from "../../../slices/adminAuthAction";
+import { deleteUser, updateUserData } from "../../../slices/adminAuthAction";
 import { useDispatch } from "react-redux";
 import { nameValidate, validatePhoneNumber, isEmailValid, isPhoneValid } from "../../../utilities/validationUtils";
+import Swal from 'sweetalert2'
 
 
 const Options = ({ userData }) => {
@@ -85,6 +86,36 @@ const Options = ({ userData }) => {
         }
     }
 
+    const handleDelete = () => {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "User will be deleted permenently!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+          }).then(async (result) => {
+            if (result.isConfirmed) {
+                const response = await dispatch(deleteUser(userData._id))
+                if(response.payload){
+                    Swal.fire({
+                        title: "Deleted!",
+                        text: "User has been deleted.",
+                        icon: "success"
+                    });
+                    window.location.reload();
+                }else{
+                    Swal.fire({
+                        icon: "error",
+                        title: "Oops...",
+                        text: "Something went wrong! Try again later..",
+                      });
+                }
+            }
+          });
+    }
+
 
     return(
         <>
@@ -111,7 +142,7 @@ const Options = ({ userData }) => {
                     </li>
                     <li className="flex items-center gap-3 pb-3 px-3">
                         <MdDelete />
-                        <a>Delete</a>
+                        <a onClick={handleDelete}>Delete</a>
                     </li>
                 </ul>
             </div>

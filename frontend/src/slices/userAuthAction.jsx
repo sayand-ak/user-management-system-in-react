@@ -4,6 +4,7 @@ import axios from "axios";
 export const loginUserAsync = createAsyncThunk('user/login', async ({ email, password }) => {
     try {
         const response = await axios.post('/api/user/auth', { email, password });
+        console.log(response.data);
         return response.data;
     } catch (error) {
         throw error.response.data; 

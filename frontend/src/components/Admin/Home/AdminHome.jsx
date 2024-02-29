@@ -6,7 +6,8 @@ import { MdLogout } from "react-icons/md";
 import { MdEdit } from "react-icons/md";
 import { FaRegUser } from "react-icons/fa";
 import { useSelector } from "react-redux";
-import { addUser } from "../../../slices/adminAuthAction";
+import { useNavigate } from 'react-router-dom';
+import { addUser, logoutAdmin } from "../../../slices/adminAuthAction";
 import { useDispatch } from "react-redux";
 import showToast from '../../Toast/Toast';
 import { ToastContainer } from 'react-toastify';
@@ -15,6 +16,7 @@ import { nameValidate, validatePhoneNumber, isPasswordValid, isEmailValid, isPho
 
 import "./Home.css";
 import { useRef, useState } from "react";
+import { adminLogout } from "../../../slices/authSlice";
 
 const Home = () => {
     const [fname, setFname] = useState("");
@@ -24,6 +26,7 @@ const Home = () => {
     const [phone, setPhone] = useState("");
     const [password, setPassword] = useState("");
     const [img, setImg] = useState(null);
+    const [searchText, setSearchText] = useState("");
 
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isprofileOpen,  setIsProfileOpen] = useState(false);
@@ -33,7 +36,13 @@ const Home = () => {
 
     const adminInfo = useSelector(state => state.admin.adminInfo.adminData);
 
+    const userData = useSelector(state => state.adminApi.userData);
+
+    const [searchedData, setSearchedText] = useState(userData);
+
     const dispatch = useDispatch();
+
+    const navigate = useNavigate();
 
 
 
@@ -84,6 +93,24 @@ const Home = () => {
         }
     }
 
+    const handleSearch = (e) => {
+        let text = e.target.value;
+        setSearchText(text);
+        const searchRegex = new RegExp(text, 'i');
+        let res =  userData.filter(user =>
+            searchRegex.test(user.fname) || searchRegex.test(user.email) 
+        );
+        res.length > 0 ? setSearchedText(res) : showToast("error", "user not found!");
+    }
+
+    const handleLogout = async() => {
+        const response = await dispatch(logoutAdmin());
+        if(response.payload){
+            dispatch(adminLogout());
+            navigate("/admin/login");
+        }
+    }
+
     return(
     <>
         <div className="admin-home">
@@ -95,8 +122,11 @@ const Home = () => {
                         <input 
                             type="text" 
                             className="h-10 pl-5 bg-gray-200 outline-none" 
-                            placeholder="Search by name" 
+                            placeholder="Search by name"
+                            value={searchText} 
+                            onChange={(e) => {handleSearch(e)}}
                         />
+                        <ToastContainer/>
 
                         <button className="px-5 bg-gray-200">
                             <FaSearch className="text-black " />
@@ -110,7 +140,7 @@ const Home = () => {
                                     <FaRegUser />
                                     {adminInfo.username}
                                 </li>
-                                <li className="flex gap-2 items-center text-red-700">
+                                <li className="flex gap-2 items-center text-red-700" onClick={handleLogout}>
                                     <MdLogout />
                                     logout
                                 </li>
@@ -128,7 +158,7 @@ const Home = () => {
             </button>
 
             <section className="flex justify-center pt-28">
-                <UserTable />
+                <UserTable searchedData={searchedData}/>
             </section>
         </div>
         

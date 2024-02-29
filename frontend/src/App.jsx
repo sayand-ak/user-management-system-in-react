@@ -1,23 +1,31 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import UserRoutes from './components/User/UserRoutes';
 import AdminRoutes from './components/Admin/AdminRoutes';
+import { useSelector } from 'react-redux';
+import ErrorComponent from './components/Error/ErrorPage';
 
 function App() {
 
+  const {user, status, error} = useSelector((state) => state.api);
+
+  console.log(user, status, error);
+
   return (
     <>
+    { status != "failed" &&
     <Router>
         <Routes>
             <Route path='/user/*' element={<UserRoutes/>} />
             <Route path='/admin/*' element={<AdminRoutes/>} />
         </Routes>
     </Router>
+  }
+  {
+    status=="failed" &&
+    <ErrorComponent/>
+  }
     </>
   )
 }
-
-// in the signup and login form the design pattern is same 
-// so can i make the form and image part seperate component 
-// and pass the elemets as props 
 
 export default App

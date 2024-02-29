@@ -19,7 +19,6 @@ const SetProfile = () => {
 
     const dispatch = useDispatch();
     const user_id = useSelector(state => state.auth.userInfo.userData._id);
-    console.log(user_id);
 
     const skipProfileSetup = () => {
         showToast("success", "signup successful..", ()=>{
@@ -56,7 +55,7 @@ const SetProfile = () => {
             const response = await dispatch(setProfileAsync(formData));
 
             if(response.payload){
-                dispatch(setCredentials(response.payload))
+                await dispatch(setCredentials(response.payload))
                 showToast("success", "Signup successfull! Welcome...",()=>{navigate("/user/home")})
             }
             

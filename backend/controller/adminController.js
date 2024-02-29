@@ -104,7 +104,28 @@ const updateUserProfile = asyncHandler(async(req, res) => {
         res.status(500)
         throw new Error("server error");
     }
-    
 })
 
-export {login, getUserData, addUser, updateUserProfile};
+const deleteUser = asyncHandler(async(req, res) => {
+    const userId = req.params.userId;
+    const result = await User.deleteOne({ _id: userId });
+
+    if(result){
+        res.status(200).json({ message: "success" });
+    }else{
+        res.status(500).json({message: "server error"});
+    }
+})
+
+// @desc logout admin
+//route POST /api/admin/logout
+// access public
+const logoutAdmin = asyncHandler(async(req, res) => {
+    res.cookie('jwt', '', {
+        httpOnly: true,
+        expires: new Date(0)
+    })
+    res.status(200).json({ message: "logout admin" })
+})
+
+export { login, getUserData, addUser, updateUserProfile, deleteUser, logoutAdmin };
